@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 function MainPage() {
   const [products, setProducts] = useState([]);
 
@@ -33,25 +34,27 @@ function MainPage() {
         <div id="product-list">
           {products.map((it, index) => (
             <div key={index} className="product-card">
-              <div>
-                <img
-                  className="product-img"
-                  src={it.imageUrl}
-                  alt="상품이미지"
-                />
-              </div>
-              <div className="product-content">
-                <span className="product-name">{it.name}</span>
-                <span className="product-price">{it.price}</span>
-              </div>
-              <div className="product-seller">
-                <img
-                  className="product-avatar"
-                  src="images/icons/avatar.png"
-                  alt="판매자이미지"
-                />
-                <span>{it.seller}</span>
-              </div>
+              <Link className="product-link" to={`/product/${index}`}>
+                <div>
+                  <img
+                    className="product-img"
+                    src={it.imageUrl}
+                    alt="상품이미지"
+                  />
+                </div>
+                <div className="product-content">
+                  <span className="product-name">{it.name}</span>
+                  <span className="product-price">{it.price}</span>
+                </div>
+                <div className="product-seller">
+                  <img
+                    className="product-avatar"
+                    src="images/icons/avatar.png"
+                    alt="판매자이미지"
+                  />
+                  <span>{it.seller}</span>
+                </div>
+              </Link>
             </div>
           ))}
         </div>
