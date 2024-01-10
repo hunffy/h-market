@@ -34,7 +34,7 @@ function MainPage() {
         <div id="product-list">
           {products.map((it, index) => (
             <div key={index} className="product-card">
-              <Link className="product-link" to={`/product/${index}`}>
+              <Link className="product-link" to={`/product/${it.id}`}>
                 <div>
                   <img
                     className="product-img"
