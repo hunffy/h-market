@@ -1,5 +1,5 @@
+import "antd/dist/antd";
 import "./App.css";
-
 import Myheader from "./components/Myheader";
 import Myfooter from "./components/Myfooter";
 import MainPage from "./main";
