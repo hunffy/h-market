@@ -39,6 +39,7 @@
 #header-area img {
   width: 128px;
   height: 36px;
+  cursor: pointer;
 }
 
 #banner > img {
