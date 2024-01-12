@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/upload" element={<UploadPage />} />
-          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/products/:id" element={<ProductPage />} />
         </Routes>
       </div>
       <Myfooter />
