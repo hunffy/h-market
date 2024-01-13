@@ -8,6 +8,7 @@ import UploadPage from "./upload";
 
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
+
 function App() {
   return (
     <div>

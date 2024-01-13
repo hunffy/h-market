@@ -6,6 +6,8 @@ import dayjs from "dayjs";
 
 import relativeTime from "dayjs/plugin/relativeTime";
 import locale from "dayjs/locale/ko";
+
+import { API_BASE_URL } from "../config/constants";
 /* dayjs, relativeTime import 하고 
 
 dayjs.extend를 통해 relativeTime넣어주어 확장시키면
@@ -23,7 +25,7 @@ function MainPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/products")
+      .get(`${API_BASE_URL}/products`)
       .then(function (result) {
         const products = result.data.products;
         setProducts(products);
@@ -38,7 +40,7 @@ function MainPage() {
       <div id="banner">
         <img src="images/banners/banner1.png" alt="bannerImg" />
       </div>
-      <h1>판매되는 상품들</h1>
+      <h1 id="product-headline">판매되는 상품들</h1>
       <div id="product-list">
         {products.map((it, index) => (
           <div key={index} className="product-card">
@@ -46,7 +48,7 @@ function MainPage() {
               <div>
                 <img
                   className="product-img"
-                  src={it.imageUrl}
+                  src={`${API_BASE_URL}/${it.imageUrl}`}
                   alt="상품이미지"
                 />
               </div>
@@ -61,7 +63,7 @@ function MainPage() {
                     src="images/icons/avatar.png"
                     alt="판매자이미지"
                   />
-                  <span>{it.seller}</span>
+                  <span className="seller-name">{it.seller}</span>
                 </div>
                 <span className="product-date">
                   {dayjs(it.createdAt).fromNow()}
