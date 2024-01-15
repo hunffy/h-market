@@ -5,12 +5,14 @@ import "./index.css";
 import { API_BASE_URL } from "../config/constants";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import { Button, message } from "antd";
 
 function ProductPage() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  useEffect(() => {
+
+  const getProduct = () => {
     axios
       .get(`${API_BASE_URL}/products/${id}`)
       .then(function (result) {
@@ -20,6 +22,10 @@ function ProductPage() {
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    getProduct();
   }, []);
 
   const handleDelete = () => {
@@ -33,6 +39,19 @@ function ProductPage() {
           console.log("error :", error);
         });
     }
+  };
+
+  const onClickPurchase = () => {
+    axios
+      .post(`${API_BASE_URL}/purchase/${id}`)
+      .then((result) => {
+        message.info("구매가 완료되었습니다.");
+        getProduct();
+      })
+      .catch((error) => {
+        console.log("error :", error);
+        message.error(`에러가 발생했습니다.${error.message}`);
+      });
   };
 
   if (!product) {
@@ -53,6 +72,16 @@ function ProductPage() {
         <div id="createdAt">
           {dayjs(product.createdAt).format("YYYY년 MM월 DD일")}
         </div>
+        <Button
+          onClick={onClickPurchase}
+          id="purchase-button"
+          size="large"
+          type="primary"
+          danger
+          disabled={product.soldout === 1 ? true : false}
+        >
+          결제하기
+        </Button>
         <pre id="description">{product.description}</pre>
       </div>
       <div className="button-box">
