@@ -9,7 +9,7 @@ function Myheader() {
     <div id="header">
       <div id="header-area">
         <img
-          src="/images/icons/logo.png"
+          src="/images/icons/h-market-logo.png"
           onClick={() => {
             naviage("/");
           }}
