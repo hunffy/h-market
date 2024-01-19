@@ -73,6 +73,8 @@
   height: 20px;
   font-weight: bold;
   cursor: pointer;
+  background-color: rgb(251, 78, 113);
+  color: white;
 }
 
 #purchase-button {
@@ -82,4 +84,25 @@
 
 #description-box {
   min-height: 150px;
+}
+
+.delete-button-box {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.delete-button-box button {
+  width: 100%;
+  height: 50px;
+}
+.recommend-box {
+  border: 1px solid #ececec;
+  margin-top: 50px;
+  border-radius: 10px;
+  background-color: #e9ecef;
+}
+
+.recommend-box h1 {
+  text-align: start;
+  margin: 20px;
 }

@@ -85,6 +85,23 @@ function ProductPage() {
         <div id="createdAt">
           {dayjs(product.createdAt).format("YYYY년 MM월 DD일")}
         </div>
+
+        <div id="description-box">
+          <pre id="description">{product.description}</pre>
+        </div>
+        <div className="button-box">
+          <button onClick={handleDelete}>삭제</button>
+        </div>
+        <div className="recommend-box">
+          <h1>추천상품</h1>
+          <div style={{ display: "flex", flexWrap: "wrap" }}>
+            {recommendation.map((product, index) => {
+              return <ProductCard product={product} key={index} />;
+            })}
+          </div>
+        </div>
+      </div>
+      <div className="delete-button-box">
         <Button
           onClick={onClickPurchase}
           id="purchase-button"
@@ -95,18 +112,6 @@ function ProductPage() {
         >
           결제하기
         </Button>
-        <div id="description-box">
-          <pre id="description">{product.description}</pre>
-        </div>
-        <div className="button-box">
-          <button onClick={handleDelete}>삭제</button>
-        </div>
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
-          <h1>추천상품</h1>
-          {recommendation.map((product, index) => {
-            return <ProductCard product={product} key={index} />;
-          })}
-        </div>
       </div>
     </div>
   );
