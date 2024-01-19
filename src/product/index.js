@@ -6,12 +6,13 @@ import { API_BASE_URL } from "../config/constants";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { Button, message } from "antd";
+import ProductCard from "../components/ProductCard";
 
 function ProductPage() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-
+  const [recommendation, setRecommendation] = useState([]);
   const getProduct = () => {
     axios
       .get(`${API_BASE_URL}/products/${id}`)
@@ -24,9 +25,21 @@ function ProductPage() {
       });
   };
 
+  const getRecommendation = () => {
+    axios
+      .get(`${API_BASE_URL}/products/${id}/recommendation`)
+      .then((result) => {
+        console.log("추천상품:", result.data);
+        setRecommendation(result.data.products);
+      })
+      .catch((error) => {
+        console.log("error : ", error);
+      });
+  };
   useEffect(() => {
     getProduct();
-  }, []);
+    getRecommendation();
+  }, [id]);
 
   const handleDelete = () => {
     if (window.confirm("삭제하시겠습니까?")) {
@@ -82,10 +95,18 @@ function ProductPage() {
         >
           결제하기
         </Button>
-        <pre id="description">{product.description}</pre>
-      </div>
-      <div className="button-box">
-        <button onClick={handleDelete}>삭제</button>
+        <div id="description-box">
+          <pre id="description">{product.description}</pre>
+        </div>
+        <div className="button-box">
+          <button onClick={handleDelete}>삭제</button>
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          <h1>추천상품</h1>
+          {recommendation.map((product, index) => {
+            return <ProductCard product={product} key={index} />;
+          })}
+        </div>
       </div>
     </div>
   );
